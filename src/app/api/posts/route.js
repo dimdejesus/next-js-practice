@@ -5,10 +5,12 @@
 // export async function DELETE(Request) {} /api/posts/<id>/
 //  A simple GET Example
 
-import posts from "@/utils/posts"
+
+import { PrismaClient } from "@prisma/client"
 
 export async function GET(request) {
-    const data = posts
+    const prisma = new PrismaClient()
+    const data = await prisma.post.findMany()
 
     return new Response(JSON.stringify(data))
 }
